@@ -84,7 +84,10 @@ func _compile_story(config: InkCompilationConfiguration) -> bool:
 
 	var start_time = Time.get_ticks_msec()
 
-	if config.use_mono:
+	if config.inklecate_path.is_empty():
+		output.append("The path to inklecate is not set. Configure it in the Ink panel (Configuration tab).")
+		return_code = -1
+	elif config.use_mono:
 		var args = [config.inklecate_path, '-o', config.target_file_path, config.source_file_path]
 		return_code = OS.execute(config.mono_path, args, output, true, false)
 	else:

@@ -48,7 +48,7 @@ enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/inkgd/plu
 [inkgd]
 
 register_templates=false
-use_mono_runtime=true
+use_mono_runtime=false
 
 [network]
 

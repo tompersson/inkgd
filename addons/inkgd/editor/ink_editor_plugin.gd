@@ -186,7 +186,8 @@ func _add_autoloads():
 ## In inkgd 1.0.0+ the runtime is no longer added automatically, but
 ## this method was kept for cleanup purposes.
 func _remove_autoloads():
-	remove_autoload_singleton("__InkRuntime")
+	if ProjectSettings.has_setting("autoload/__InkRuntime"):
+		remove_autoload_singleton("__InkRuntime")
 
 
 ## Registers the script templates provided by the plugin.
