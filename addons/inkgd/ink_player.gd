@@ -840,7 +840,8 @@ func _remove_runtime(root: Node) -> void:
 
 
 func _current_platform_supports_threads() -> bool:
-	return OS.get_name() != "HTML5"
+	# Web exports only support threads when exported with thread support.
+	return !OS.has_feature("web") || OS.has_feature("threads")
 
 
 func _push_null_runtime_error() -> void:

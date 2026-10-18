@@ -1119,7 +1119,8 @@ public partial class InkPlayer : Node
 
 	private bool CurrentPlatformSupportsThreads()
 	{
-		return OS.GetName() != "HTML5";
+		// Web exports only support threads when exported with thread support.
+		return !OS.HasFeature("web") || OS.HasFeature("threads");
 	}
 
 	private void PushNullStoryError()
