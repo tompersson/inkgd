@@ -422,9 +422,7 @@ func continue_story_maximally() -> String:
 
 	var text: String = ""
 	if self.can_continue:
-		_story.continue_story_maximally()
-
-		text = self.current_text
+		text = _story.continue_story_maximally()
 
 	elif self.has_choices:
 		emit_signal("prompt_choices", self.current_choices)

@@ -28,6 +28,13 @@ func test_continue() -> void:
 	assert_eq(_exception_messages_raised.size(), 0)
 
 
+func test_continue_maximally_returns_all_lines() -> void:
+	await _load_story("multiple_lines")
+
+	assert_eq(_ink_player.continue_story_maximally(), "Line one.\nLine two.\nLine three.\n")
+	assert_eq(_ink_player.current_text, "Line three.\n")
+
+
 func test_tags() -> void:
 	await _load_story("flow")
 

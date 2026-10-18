@@ -388,8 +388,7 @@ public partial class InkPlayer : Node
 		{
 			if (can_continue)
 			{
-				story.ContinueMaximally();
-				text = current_text;
+				text = story.ContinueMaximally();
 			}
 			else if (has_choices)
 			{
