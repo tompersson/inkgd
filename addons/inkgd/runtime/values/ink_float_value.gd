@@ -38,10 +38,14 @@ func cast(new_type, metadata = null):
 		return InkIntValue.new_with(int(value))
 
 	if new_type == Ink.ValueType.STRING:
-		return InkStringValue.new_with(str(value)) # TODO: Check formating
+		return InkStringValue.new_with(_to_string())
 
 	InkUtils.throw_story_exception(bad_cast_exception_message(new_type), false, metadata)
 	return null
+
+# Godot 4 formats whole floats as "1.0", whereas ink outputs them as "1".
+func _to_string() -> String:
+	return str(value).trim_suffix(".0")
 
 # ######################################################################## #
 # GDScript extra methods

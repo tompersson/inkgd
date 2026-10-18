@@ -1544,7 +1544,11 @@ func observe_variable(variable_name: String, object, method_name: String) -> voi
 		return
 
 	if _variable_observers.has(variable_name):
-		_variable_observers[variable_name].connect("variable_changed", Callable(object, method_name))
+		# GDScript signals can't be connected twice to the same callable,
+		# so an observer can only be added once per variable.
+		var callable = Callable(object, method_name)
+		if !_variable_observers[variable_name].is_connected("variable_changed", callable):
+			_variable_observers[variable_name].connect("variable_changed", callable)
 	else:
 		var new_observer = VariableObserver.new(variable_name)
 		new_observer.connect("variable_changed", Callable(object, method_name))

@@ -51,6 +51,7 @@ func test_evaluate_missing_function() -> void:
 
 	# TODO: bind "on_error" instead.
 	assert_eq(_exception_messages_raised.size(), 1)
+	assert_push_error("Function doesn't exist")
 
 func test_evaluate_missing_arguments() -> void:
 	await _load_story("functions")
@@ -60,6 +61,7 @@ func test_evaluate_missing_arguments() -> void:
 
 	# TODO: bind "on_error" instead.
 	assert_eq(_exception_messages_raised.size(), 1)
+	assert_push_error("trying to pop an empty evaluation stack")
 
 
 func test_function_fallback() -> void:
@@ -76,6 +78,7 @@ func test_function_no_fallback() -> void:
 	_ink_player.continue_story_maximally()
 
 	assert_eq(_exception_messages_raised.size(), 1)
+	assert_push_error("Missing function binding for external")
 
 
 func test_function_binding() -> void:

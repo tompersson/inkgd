@@ -48,6 +48,7 @@ func test_set_non_existent_variable():
 	story.variables_state.set_variable("y", "earth")
 
 	assert_eq(_exception_raised_count, 1)
+	assert_push_error("Cannot assign to a variable (y)")
 
 func test_temp_global_conflict():
 	var story := InkStory.new(load_file("temp_global_conflict"))
@@ -114,6 +115,7 @@ func test_variable_get_set_api():
 
 	story.variables_state.set_variable("x", [])
 	assert_eq(_exception_raised_count, 1)
+	assert_push_error("Invalid value passed to VariableState")
 
 func test_variable_pointer_ref_from_knot():
 	var story := InkStory.new(load_file("variable_pointer_ref_from_knot"))
