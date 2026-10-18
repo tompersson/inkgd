@@ -65,18 +65,28 @@ func _import(source_file, save_path, options, _platform_variants, _gen_files):
 	_configuration.retrieve()
 
 	var raw_json = _get_file_content(source_file)
+	if raw_json is int:
+		return raw_json
 
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(raw_json)
-	var json = test_json_conv.get_data()
-	if !json.has("inkVersion"):
-		return ERR_FILE_UNRECOGNIZED
+	var json := JSON.new()
+	var error := json.parse(raw_json)
+	if error != OK:
+		return error
+
+	var flags = ResourceSaver.FLAG_COMPRESS if options["compress"] else 0
+	var path = "%s.%s" % [save_path, _get_save_extension()]
+
+	# This importer is registered for every .json file. Files that aren't ink
+	# stories are imported as regular JSON resources, so that they load the
+	# same way they would without inkgd.
+	var data = json.data
+	if !(data is Dictionary && data.has("inkVersion")):
+		return ResourceSaver.save(json, path, flags)
 
 	var resource = InkResource.new()
 	resource.json = raw_json
 
-	var flags = ResourceSaver.FLAG_COMPRESS if options["compress"] else 0
-	return ResourceSaver.save(resource, "%s.%s" % [save_path, _get_save_extension()], flags)
+	return ResourceSaver.save(resource, path, flags)
 
 # ############################################################################ #
 # Private Helpers
