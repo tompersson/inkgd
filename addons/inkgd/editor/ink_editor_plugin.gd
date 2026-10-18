@@ -199,9 +199,9 @@ func _add_templates():
 	var names = _get_plugin_templates_names()
 
 	# Setup the templates folder for the project
-	var template_dir_path = ProjectSettings.get_setting("editor/script/templates_search_path")
+	var template_dir_path = _get_template_dir_path()
 	if !DirAccess.dir_exists_absolute(template_dir_path):
-		DirAccess.make_dir_absolute(template_dir_path)
+		DirAccess.make_dir_recursive_absolute(template_dir_path)
 
 	for template_name in names:
 		var template_file_path = template_dir_path + "/" + template_name
@@ -211,12 +211,18 @@ func _add_templates():
 ## Unregisters the script templates provided by the plugin.
 func _remove_templates():
 	var names = _get_plugin_templates_names()
-	var template_dir_path = ProjectSettings.get_setting("editor/script/templates_search_path")
+	var template_dir_path = _get_template_dir_path()
 
 	for template_name in names:
 		var template_file_path = template_dir_path + "/" + template_name
 		if FileAccess.file_exists(template_file_path):
 			DirAccess.remove_absolute(template_file_path)
+
+
+## Godot 4 only picks up templates stored in a folder named after the type
+## they extend. The templates add the player as a child, so they need a Node.
+func _get_template_dir_path() -> String:
+	return ProjectSettings.get_setting("editor/script/templates_search_path") + "/Node"
 
 
 ## Get all the script templates provided by the plugin.
