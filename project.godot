@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="inkgd"
 run/main_scene="res://examples/scenes/main.tscn"
-config/features=PackedStringArray("4.7")
+config/features=PackedStringArray("4.7", "C#")
 boot_splash/bg_color=Color(0.929412, 0.898039, 0.854902, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="res://examples/images/transparent.png"
@@ -48,7 +48,7 @@ enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/inkgd/plu
 [inkgd]
 
 register_templates=false
-use_mono_runtime=false
+use_mono_runtime=true
 
 [network]
 
