@@ -344,7 +344,7 @@ func list_with_sub_range(min_bound, max_bound) -> InkList:
 	if max_bound is int:
 		max_value = max_bound
 	else:
-		if min_bound.is_ink_class("InkList") && min_bound.size() > 0:
+		if max_bound.is_ink_class("InkList") && max_bound.size() > 0:
 			max_value = max_bound.max_item.value
 
 	var sub_list = InkList.new()

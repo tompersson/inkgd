@@ -6,4 +6,5 @@ VAR all = ()
 {all}
 {LIST_RANGE(all, 2, 3)}
 {LIST_RANGE(LIST_ALL(Numbers), Two, Six)}
+{LIST_RANGE(LIST_ALL(Numbers), Currency, Three)}
 {LIST_RANGE((Pizza, Pasta), -1, 100)} // allow out of range

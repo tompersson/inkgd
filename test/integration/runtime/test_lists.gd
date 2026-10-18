@@ -45,7 +45,7 @@ func test_list_random():
 func test_list_range():
 	var story := InkStory.new(load_file("list_range"))
 
-	assert_eq(story.continue_story_maximally(), "Pound, Pizza, Euro, Pasta, Dollar, Curry, Paella\nEuro, Pasta, Dollar, Curry\nTwo, Three, Four, Five, Six\nPizza, Pasta\n")
+	assert_eq(story.continue_story_maximally(), "Pound, Pizza, Euro, Pasta, Dollar, Curry, Paella\nEuro, Pasta, Dollar, Curry\nTwo, Three, Four, Five, Six\nOne, Two, Three\nPizza, Pasta\n")
 
 
 func test_list_save_load():
