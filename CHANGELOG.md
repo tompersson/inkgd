@@ -6,8 +6,12 @@ Released on 2023-XX-XX.
 
 ### Added
 - Added support for Godot 4.1.1+
+- Added support for Godot 4.7.
 
 ### Changed
+- Updated GUT to 9.7.1.
+- The compiler now reports a clear error when the path to inklecate isn't set.
+- Script templates are now installed in `script_templates/Node`, as required by Godot 4.
 
 #### ⚠️ **BREAKING CHANGE**
 - Reorganized files internally and updated type names.
@@ -16,6 +20,26 @@ Released on 2023-XX-XX.
 - [`InkVariableStates`] Renamed `get` and `set` to `get_variable` and `set_variable` due to keyword conflicts.
 - [`InkPlayer`] Renamed `continue`, `continue_async`, `continue_maximally`, `get` and `set` to
   `continue_story`, `continue_story_async`, `continue_story_maximally`, `get_variable` and `set_variable` due to keyword conflicts.
+
+### Fixed
+- Fixed [#65] & [#78] – JSON files that aren't ink stories failed to import. They are now imported
+  as regular JSON resources.
+- Fixed [#79] – `InkPlayer.continue_story_maximally()` only returned the last line.
+- Fixed [#82] & [#95] – Script templates didn't show up in Godot 4.
+- Fixed [#83] – Changing scenes with an `InkPlayer` in the tree raised an error and leaked the runtime.
+- Fixed [#96] – Stories never loaded in web exports without thread support.
+- Whole numbers stored as floats were output as `1.0` instead of `1`.
+- `LIST_RANGE` ignored its upper bound when the lower bound was an empty list.
+- Observing the same variable twice with the same method raised an error.
+- Removed spurious errors when looking up the runtime node and when disabling the plugin.
+
+[#65]: https://github.com/ephread/inkgd/issues/65
+[#78]: https://github.com/ephread/inkgd/issues/78
+[#79]: https://github.com/ephread/inkgd/issues/79
+[#82]: https://github.com/ephread/inkgd/issues/82
+[#83]: https://github.com/ephread/inkgd/issues/83
+[#95]: https://github.com/ephread/inkgd/issues/95
+[#96]: https://github.com/ephread/inkgd/issues/96
 
 ## [0.5.0](https://github.com/ephread/inkgd/releases/tag/0.5.0)
 Released on 2023-08-28.
