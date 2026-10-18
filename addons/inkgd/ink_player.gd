@@ -305,7 +305,10 @@ func _init():
 # ############################################################################ #
 
 func _exit_tree():
-	call_deferred("_remove_runtime")
+	# Removal is deferred because the root may be busy (e.g. during a scene
+	# change). By then, get_tree() returns null, so the root is captured now.
+	if _manages_runtime:
+		_remove_runtime.call_deferred(get_tree().root)
 
 
 # ############################################################################ #
@@ -833,9 +836,9 @@ func _add_runtime() -> void:
 	_ink_runtime = weakref(runtime)
 
 
-func _remove_runtime() -> void:
-	if _manages_runtime:
-		InkRuntimeManager.deinit(get_tree().root)
+func _remove_runtime(root: Node) -> void:
+	InkRuntimeManager.deinit(root)
+	_manages_runtime = false
 
 
 func _current_platform_supports_threads() -> bool:

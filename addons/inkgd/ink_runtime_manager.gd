@@ -35,5 +35,8 @@ static func init(root_node, stop_on_error = true):
 
 static func deinit(root_node):
 	var _ink_runtime = InkUtils.InkRuntime
+	if _ink_runtime == null:
+		return
+
 	root_node.remove_child(_ink_runtime)
 	_ink_runtime.queue_free()
